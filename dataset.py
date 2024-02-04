@@ -23,8 +23,8 @@ class BilingualDataset(Dataset):
 
     def __getitem__(self, idx):
         src_target_pair = self.ds[idx]
-        src_text = src_target_pair['translation'][self.src_lang]
-        tgt_text = src_target_pair['translation'][self.tgt_lang]
+        src_text = src_target_pair['src' if self.src_lang == "en" else 'tgt']
+        tgt_text = src_target_pair['src' if self.tgt_lang == "en" else 'tgt']
 
         # Transform the text into tokens
         enc_input_tokens = self.tokenizer_src.encode(src_text).ids
